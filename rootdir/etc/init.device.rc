@@ -1,0 +1,42 @@
+on boot
+    # ToF sensor
+    chown cameraserver camera /dev/i2c-8
+    chmod 666 /dev/i2c-8
+    chown cameraserver camera /sys/devices/virtual/input/tof_sensor/tof_power_ctl
+    chmod 666 /sys/devices/virtual/input/tof_sensor/tof_power_ctl
+
+    # RGBC-IR sensor
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_Itime
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_all
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_auto_gain
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_blue
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_channel
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_clear
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_gain
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_green
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_persist
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_power_state
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_red
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_thres
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/chip_id
+    chown cameraserver camera /sys/devices/virtual/input/rgbcir_sensor/chip_pow
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_Itime
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_auto_gain
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_channel
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_gain
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_persist
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_power_state
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thres
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/als_thresh_deltaP
+    chmod 666 /sys/devices/virtual/input/rgbcir_sensor/chip_pow
+
+# QC3.0 charging detection daemon
+on property:vold.decrypt=trigger_restart_framework
+    start hvdcp_opti
+    setprop persist.hvdcp.allow_opti 1
+
+service hvdcp_opti /vendor/bin/hvdcp_opti
+    user root
+    group system wakelock
+    disabled
