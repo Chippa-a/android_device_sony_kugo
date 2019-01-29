@@ -1,0 +1,4 @@
+# sysfs
+genfscon sysfs /devices/soc/7af6000.i2c/i2c-6/6-0025/power_supply/typec u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/virtual/input/input0	                        u:object_r:sysfs_tof_rgbcir:s0
+genfscon sysfs /devices/virtual/input/input1	                        u:object_r:sysfs_tof_rgbcir:s0
