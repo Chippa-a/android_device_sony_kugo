@@ -54,5 +54,8 @@ PRODUCT_COPY_FILES += \
 # USB PID
 PRODUCT_PROPERTY_OVERRIDES += ro.usb.pid_suffix=1E8
 
+# SEMC
+PRODUCT_PROPERTY_OVERRIDES += ro.semc.product.model=F5321
+
 # Inherit from loire-common
 $(call inherit-product, device/sony/loire-common/platform.mk)
